@@ -21,6 +21,16 @@ body {
     padding-bottom: 50px;
 }
 
+#address {
+    background-color: whitesmoke;
+    color: gray;
+    padding: 8px 8px 8px 8px;
+    font-size: 11px;
+    border-radius: 6px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
 #choice {
     display: flex;
     justify-content: space-between;
@@ -101,7 +111,6 @@ input {
     z-index: 300;
     position: fixed;
     text-align: center;
-    transition: width 2s linears;
 }
 
 #kr-leftside2 ul {
@@ -134,6 +143,9 @@ input {
 }
 
 @media (max-width: 560px) {
+    .section-header {
+        flex-direction: column-reverse;
+    }
     .mySidebar {
         display: flex !important;
         overflow-x: hidden !important;
@@ -266,6 +278,7 @@ input {
     place-items: center;
     justify-content: center;
     width: 100%;
+    height: max-content;
     border-radius: 15px;
     padding-bottom: 20px;
     grid-gap: 8px;
@@ -277,17 +290,35 @@ input {
     height: 200px;
     width: 100%;
     background-color: whitesmoke;
-    align-items: flex-start;
-    padding-left: 30px;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 20px;
     text-align: left;
     font-weight: 13px;
     font-weight: bold;
     padding-bottom: 20px;
-    overflow-x: scroll;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
     overflow-y: hidden;
     border-bottom: solid #223C60 4px;
-    border-left: solid rgb(220, 220, 220) 1px;
+    border-left: solid #dcdcdc 1px;
+}
+
+.card .details::-webkit-scrollbar {
+    width: 10px;
+    height: 6px;
+}
+
+.card .details::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+}
+
+.card .details::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .card .details h3 {
@@ -362,15 +393,6 @@ input {
         justify-content: center;
         align-items: center;
     }
-    .gate {
-        left: 30px;
-        display: flex !important;
-        flex-direction: row;
-        justify-content: center;
-        width: 100%;
-        margin-right: 100px;
-        margin-top: 0px;
-    }
 }
 
 .logo {
@@ -397,51 +419,6 @@ input {
     left: 70;
 }
 
-#disconnect {
-    display: none;
-}
-
-.gate {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    overflow-x: auto;
-    overflow-y: hidden;
-    grid-gap: 8px;
-    width: 100%;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    position: relative;
-    margin-top: 80px;
-}
-
-@media (min-width: 560px) {
-    .gate::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
-    }
-    .gate::-webkit-scrollbar-thumb {
-        background: grey;
-        border-radius: 10px;
-    }
-    .gate::-webkit-scrollbar-track {
-        background: transparent;
-    }
-}
-
-@media (max-width: 560px) {
-    .gate::-webkit-scrollbar {
-        width: 0px;
-        height: 0px;
-    }
-    .gate::-webkit-scrollbar-thumb {
-        background: none !important;
-    }
-    .gate::-webkit-scrollbar-track {
-        background: transparent;
-    }
-}
-
 .connect-wallet {
     display: flex;
     flex-direction: row-reverse;
@@ -463,26 +440,6 @@ input {
     font-size: large;
 }
 
-.connect-wallet2 {
-    display: grid;
-    flex-direction: 100%;
-    place-items: flex-start;
-    background: silver;
-    border-radius: 12px;
-    width: 250px;
-    height: 100px;
-    padding: 12px 12px 10px 10px;
-    color: rgb(2, 2, 22);
-    position: relative;
-}
-
-.connect-wallet2 div {
-    width: 250px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .section-header {
     padding-bottom: 20px;
     color: #223C60;
@@ -491,6 +448,9 @@ input {
     letter-spacing: 2px;
     text-align: center;
     padding-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .overview {
@@ -502,34 +462,13 @@ input {
     border-radius: 8px;
 }
 
-.tile {
-    display: grid;
-    grid-template-columns: 100%;
-    line-height: 5px;
-    padding: 20px 12px 12px 12px;
-    font-weight: bold;
-}
-
-.tile label {
-    color: grey;
-}
-
-.tile h2 {
-    font-size: 35px;
-}
-
-.tile div {
-    display: flex;
-    justify-content: space-around;
-}
-
 .details button {
     margin-top: 15px;
     border-radius: 20px;
     padding-right: 10px;
     padding-left: 10px;
     height: 44px;
-    width: 100%;
+    width: 150px;
     font-weight: 900;
     border: none;
     color: black;
@@ -594,22 +533,6 @@ input {
     padding-bottom: 50px;
     border-radius: 20px;
     width: 100%;
-}
-
-.Grid {
-    display: flex;
-    grid-template-columns: 50% 50%;
-    place-items: flex-start;
-    justify-items: start;
-    text-align: left;
-    width: 100%;
-    padding: 0 !important;
-}
-
-.gridd {
-    text-align: left;
-    display: grid;
-    grid-template-columns: 100%;
 }
 
 @media (min-width: 920px) {
