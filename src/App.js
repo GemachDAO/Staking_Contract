@@ -15,9 +15,13 @@ import { MyFooter } from './components/my_footer';
 
 function App() {
 
+    
+  
+
 const [approve, setApprove] = useState(false);
 const [unstake, setUnstake] = useState(false);
-const [account, setAccount] = useState();
+//const [account, setAccount] = useState();
+const [shortAddress, setShortAddress] = useState();
 const [balance, setBalance] = useState();
 const [totalStacked, setTotalStacked] = useState();
 const [totalClaimed, setTotalClaimed] = useState();
@@ -28,9 +32,18 @@ const [earned, setEarned] = useState();
 //Connect to Eth Wallet
 useEffect(() => {
  async function init() {
-   const web3 = new Web3(Web3.givenProvider ||'http://localhost:8545');
+      const web3 = new Web3(Web3.givenProvider ||'http://localhost:8545');
    const accounts = await web3.eth.requestAccounts();
-    setAccount(accounts[0]); //This shows the connected Eth Wallet Address
+//setAccount(accounts[0]); //This shows the full connected Eth Wallet Address
+
+//Get abbrievated address 
+var string = accounts[0];
+var end= accounts[0].length;
+var start = end - 4;
+var string1 = string.substring(0,5);
+var string2 = string.substring(start, end);
+const _address = string1 + '...' + string2;
+setShortAddress(_address);
 
 ////Connect to Smart Contract
 const Rewards = require('./build/contracts/Rewards.json')
@@ -40,7 +53,6 @@ const contract = new web3.eth.Contract(
     Rewards.abi,
     deployedNetwork.address
 );
-
 
 ///Get Balance
 const Balance = await contract.methods.balanceOf(accounts[0]).call()
@@ -69,12 +81,12 @@ setEarned(earned);
 
 
 ///Function For Stake 
-const stake = await contract.methods.stake(10).call()
+//const stake = await contract.methods.stake().call()
 //Set State Function for staking so that you can call the function from anywhere
 
 
 /// Function Withdraw
-const withdraw = await contract.methods.withdraw(1).call()
+//const withdraw = await contract.methods.withdraw(1).call()
 //Set State Function for staking so that you can call the function from anywhere
 
 
@@ -82,25 +94,25 @@ const withdraw = await contract.methods.withdraw(1).call()
 }, []);
 
 
-//On Clicking Approve Stake  
+//On Clicking Approve Button  
 const toApprove = () => {
     setApprove(true);
     setTimeout(() => setApprove(false), 300); 
-    // UseState for staking function
+    // Call stake function
 
 }
 
-//On Clicking Unstake Stake 
+//On Clicking Unstake Button 
 const toUnstake = () => {
     setUnstake(true);
     setTimeout(() => setUnstake(false), 300);  
      // UseState for unstaking function
 }
 
-//On Clicking Withdraw Stake 
-const toWithdraw = () => {
+//On Clicking Withdraw Button 
+//const toWithdraw = () => {
      // UseState for withrawing function
-}
+//}
 
 
 
@@ -111,7 +123,12 @@ const toWithdraw = () => {
       <br/>
         <div id="main">
 
-            <div className="section-header" style={{paddingLeft: 30}}>Account Overview</div>
+            <div className="section-header">Account Overview
+            <span id='address'>
+                {shortAddress}
+            </span>
+            
+            </div>
             <div className='home'>
 
                 <div className='card'>
@@ -158,7 +175,7 @@ const toWithdraw = () => {
 
                     </div>
                     <div className='details'>
-                        <label>Claim Rewards</label>
+                        <label>Claim</label>
                         <h3>Rewards</h3>
                         <span>     <button className="claim">
                 CLAIM TOKEN
