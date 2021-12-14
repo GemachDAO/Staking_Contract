@@ -34,6 +34,16 @@ const closeNav = () => {
       });
 } 
 
+//CLosing sidebar when width is changed
+window.addEventListener("resize", function(event) {
+if (this.document.body.clientWidth > 920) {
+    document.getElementById("xlose").style.display = "none";
+              document.getElementById("opet").style.display = "block";
+              document.getElementById("kr-leftside2").style.display = "none";
+}
+});
+
+
 return (
 
     <div>
